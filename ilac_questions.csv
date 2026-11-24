@@ -1,0 +1,7 @@
+subject,concept,question,option_a,option_b,option_c,option_d,correct_answer
+Digital Electronics,Logic Gates,What is the output of an AND gate when both inputs are 1?,0,1,X,Z,A
+Digital Electronics,Flip-Flops,Which flip-flop stores one bit of data?,JK Flip-Flop,D Flip-Flop,SR Flip-Flop,T Flip-Flop,B
+DSP,Sampling,What is the Nyquist sampling frequency?,Twice the maximum signal frequency,Half the maximum signal frequency,Equal to maximum signal frequency,Four times the maximum signal frequency,A
+DSP,DFT,DFT converts a signal into which domain?,Time domain,Frequency domain,Amplitude domain,Spatial domain,B
+Electronic Devices,Diodes,A forward-biased ideal diode acts as what?,Open circuit,Short circuit,High resistance,Infinite resistance,B
+Electronic Devices,MOSFET,Which charge carriers form the NMOS channel?,Electrons,Holes,Protons,Neutrons,A
