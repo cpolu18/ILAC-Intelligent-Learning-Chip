@@ -1,0 +1,96 @@
+VCD info: dumpfile ilac_soc_waveform.vcd opened for output.
+================================
+ILAC AXI4-LITE SOC TEST STARTED
+================================
+SOC RESET RELEASED
+--------------------------------
+AXI WRITE START: Address=0x0 Data=0x00000001
+AWREADY and WREADY received
+BVALID received, BRESP=0
+AXI WRITE COMPLETED
+--------------------------------
+Question 1: CORRECT
+AXI WRITE START: Address=0x4 Data=0x00000001
+AWREADY and WREADY received
+BVALID received, BRESP=0
+AXI WRITE COMPLETED
+--------------------------------
+Question 2: CORRECT
+AXI WRITE START: Address=0x4 Data=0x00000001
+AWREADY and WREADY received
+BVALID received, BRESP=0
+AXI WRITE COMPLETED
+--------------------------------
+Question 3: CORRECT
+AXI WRITE START: Address=0x4 Data=0x00000001
+AWREADY and WREADY received
+BVALID received, BRESP=0
+AXI WRITE COMPLETED
+--------------------------------
+Question 4: CORRECT
+AXI WRITE START: Address=0x4 Data=0x00000001
+AWREADY and WREADY received
+BVALID received, BRESP=0
+AXI WRITE COMPLETED
+--------------------------------
+Question 5: CORRECT
+AXI WRITE START: Address=0x4 Data=0x00000001
+AWREADY and WREADY received
+BVALID received, BRESP=0
+AXI WRITE COMPLETED
+--------------------------------
+Question 6: CORRECT
+AXI WRITE START: Address=0x4 Data=0x00000001
+AWREADY and WREADY received
+BVALID received, BRESP=0
+AXI WRITE COMPLETED
+--------------------------------
+Question 7: CORRECT
+AXI WRITE START: Address=0x4 Data=0x00000001
+AWREADY and WREADY received
+BVALID received, BRESP=0
+AXI WRITE COMPLETED
+--------------------------------
+Question 8: CORRECT
+AXI WRITE START: Address=0x4 Data=0x00000001
+AWREADY and WREADY received
+BVALID received, BRESP=0
+AXI WRITE COMPLETED
+--------------------------------
+Question 9: INCORRECT
+AXI WRITE START: Address=0x4 Data=0x00000000
+AWREADY and WREADY received
+BVALID received, BRESP=0
+AXI WRITE COMPLETED
+--------------------------------
+Question 10: INCORRECT
+AXI WRITE START: Address=0x4 Data=0x00000000
+AWREADY and WREADY received
+BVALID received, BRESP=0
+AXI WRITE COMPLETED
+--------------------------------
+AXI READ START: Address=0x8
+ARREADY received
+RVALID received
+Read Data = 0x00000a08
+RRESP = 0
+AXI READ COMPLETED
+--------------------------------
+AXI READ START: Address=0xc
+ARREADY received
+RVALID received
+Read Data = 0x00000002
+RRESP = 0
+AXI READ COMPLETED
+--------------------------------
+================================
+ILAC SOC FINAL RESULTS
+================================
+Correct Answers      : 8
+Total Answers        : 10
+Classification Code  : 2
+Classification       : GOOD
+--------------------------------
+PASS: ILAC AXI SOC BRIDGE TEST
+================================
+ilac_bridge_tb.sv:227: $finish called at 430000 (1ps)

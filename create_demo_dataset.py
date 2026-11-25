@@ -9,7 +9,8 @@ data = []
 
 for i in range(120):
 
-    total_questions = random.randint(1, 20)
+    total_questions = random.randint(1
+                                     , 20)
 
     correct_answers = random.randint(
         0, total_questions

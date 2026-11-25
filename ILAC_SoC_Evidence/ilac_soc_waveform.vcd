@@ -1,0 +1,778 @@
+$date
+	Wed Nov 25 09:10:22 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module ilac_bridge_tb $end
+$var wire 1 ! WREADY $end
+$var wire 1 " RVALID $end
+$var wire 2 # RRESP [1:0] $end
+$var wire 32 $ RDATA [31:0] $end
+$var wire 1 % BVALID $end
+$var wire 2 & BRESP [1:0] $end
+$var wire 1 ' AWREADY $end
+$var wire 1 ( ARREADY $end
+$var reg 1 ) ACLK $end
+$var reg 4 * ARADDR [3:0] $end
+$var reg 1 + ARESETN $end
+$var reg 1 , ARVALID $end
+$var reg 4 - AWADDR [3:0] $end
+$var reg 1 . AWVALID $end
+$var reg 1 / BREADY $end
+$var reg 1 0 RREADY $end
+$var reg 32 1 WDATA [31:0] $end
+$var reg 4 2 WSTRB [3:0] $end
+$var reg 1 3 WVALID $end
+$var reg 32 4 classification_result [31:0] $end
+$var reg 32 5 performance_result [31:0] $end
+$var integer 32 6 i [31:0] $end
+$scope module dut $end
+$var wire 1 ) ACLK $end
+$var wire 4 7 ARADDR [3:0] $end
+$var wire 1 + ARESETN $end
+$var wire 1 , ARVALID $end
+$var wire 4 8 AWADDR [3:0] $end
+$var wire 1 . AWVALID $end
+$var wire 1 / BREADY $end
+$var wire 1 0 RREADY $end
+$var wire 32 9 WDATA [31:0] $end
+$var wire 4 : WSTRB [3:0] $end
+$var wire 1 3 WVALID $end
+$var wire 1 ! WREADY $end
+$var wire 1 " RVALID $end
+$var wire 2 ; RRESP [1:0] $end
+$var wire 32 < RDATA [31:0] $end
+$var wire 1 % BVALID $end
+$var wire 2 = BRESP [1:0] $end
+$var wire 1 ' AWREADY $end
+$var wire 1 ( ARREADY $end
+$scope module ilac_accelerator $end
+$var wire 1 ) ACLK $end
+$var wire 4 > ARADDR [3:0] $end
+$var wire 1 + ARESETN $end
+$var wire 1 ( ARREADY $end
+$var wire 1 , ARVALID $end
+$var wire 4 ? AWADDR [3:0] $end
+$var wire 1 ' AWREADY $end
+$var wire 1 . AWVALID $end
+$var wire 1 / BREADY $end
+$var wire 1 0 RREADY $end
+$var wire 32 @ WDATA [31:0] $end
+$var wire 1 ! WREADY $end
+$var wire 4 A WSTRB [3:0] $end
+$var wire 1 3 WVALID $end
+$var wire 1 B aw_fire $end
+$var wire 1 C w_fire $end
+$var wire 8 D total_count [7:0] $end
+$var wire 8 E correct_count [7:0] $end
+$var wire 2 F classification [1:0] $end
+$var wire 4 G active_write_strb [3:0] $end
+$var wire 32 H active_write_data [31:0] $end
+$var wire 4 I active_write_address [3:0] $end
+$var reg 2 J BRESP [1:0] $end
+$var reg 1 % BVALID $end
+$var reg 32 K RDATA [31:0] $end
+$var reg 2 L RRESP [1:0] $end
+$var reg 1 " RVALID $end
+$var reg 1 M accelerator_reset $end
+$var reg 1 N answer_correct $end
+$var reg 1 O answer_valid $end
+$var reg 4 P saved_write_address [3:0] $end
+$var reg 32 Q saved_write_data [31:0] $end
+$var reg 4 R saved_write_strb [3:0] $end
+$var reg 1 S write_address_saved $end
+$var reg 1 T write_data_saved $end
+$scope module accelerator $end
+$var wire 1 N answer_correct $end
+$var wire 1 O answer_valid $end
+$var wire 1 ) clk $end
+$var wire 1 M reset $end
+$var wire 8 U total_count [7:0] $end
+$var wire 8 V correct_count [7:0] $end
+$var wire 2 W classification [1:0] $end
+$scope module classifier $end
+$var wire 8 X total_count [7:0] $end
+$var wire 16 Y total_70 [15:0] $end
+$var wire 16 Z total_40 [15:0] $end
+$var wire 16 [ correct_scaled [15:0] $end
+$var wire 8 \ correct_count [7:0] $end
+$var reg 2 ] classification [1:0] $end
+$upscope $end
+$scope module processor $end
+$var wire 1 N answer_correct $end
+$var wire 1 O answer_valid $end
+$var wire 1 ) clk $end
+$var wire 1 M reset $end
+$var reg 8 ^ correct_count [7:0] $end
+$var reg 8 _ total_count [7:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope task axi_read $end
+$var reg 4 ` address [3:0] $end
+$var reg 32 a data [31:0] $end
+$upscope $end
+$scope task axi_write $end
+$var reg 4 b address [3:0] $end
+$var reg 32 c data [31:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+bx c
+bx b
+bx a
+bx `
+bx _
+bx ^
+bx ]
+bx \
+bx [
+bx Z
+bx Y
+bx X
+bx W
+bx V
+bx U
+xT
+xS
+bx R
+bx Q
+bx P
+xO
+xN
+xM
+bx L
+bx K
+bx J
+bx I
+bx H
+bx G
+bx F
+bx E
+bx D
+0C
+0B
+b0 A
+b0 @
+b0 ?
+b0 >
+bx =
+bx <
+bx ;
+b0 :
+b0 9
+b0 8
+b0 7
+bx 6
+b0 5
+b0 4
+03
+b0 2
+b0 1
+10
+1/
+0.
+b0 -
+0,
+0+
+b0 *
+0)
+0(
+0'
+bx &
+x%
+bx $
+bx #
+x"
+0!
+$end
+#5000
+b0 G
+b0 H
+b0 I
+0M
+0N
+0O
+b0 #
+b0 ;
+b0 L
+b0 $
+b0 <
+b0 K
+0"
+b0 &
+b0 =
+b0 J
+0%
+0T
+0S
+b0 R
+b0 Q
+b0 P
+1)
+#10000
+0)
+#15000
+1)
+#20000
+0)
+#25000
+1)
+#30000
+0)
+#35000
+1)
+#40000
+1'
+1!
+1(
+b1 c
+b0 b
+1+
+0)
+#45000
+1)
+#50000
+1C
+1B
+b1 G
+b1 H
+13
+1.
+b1 2
+b1 :
+b1 A
+b1 1
+b1 9
+b1 @
+0)
+#55000
+0B
+0C
+0'
+0!
+1%
+1M
+0T
+b1 R
+b1 Q
+0S
+1)
+#60000
+03
+0.
+0)
+#65000
+b11 F
+b11 W
+b11 ]
+1'
+1!
+b0 Y
+b0 Z
+b0 D
+b0 U
+b0 X
+b0 _
+b0 [
+b0 E
+b0 V
+b0 \
+b0 ^
+0%
+0M
+1)
+#70000
+b100 b
+b0 6
+0)
+#75000
+1)
+#80000
+1C
+1B
+b100 I
+13
+1.
+b100 -
+b100 8
+b100 ?
+0)
+#85000
+0B
+0C
+0'
+0!
+1%
+1N
+1O
+0T
+0S
+b100 P
+1)
+#90000
+03
+0.
+0)
+#95000
+1'
+1!
+b10 F
+b10 W
+b10 ]
+0%
+0O
+b1100100 [
+b1 E
+b1 V
+b1 \
+b1 ^
+b1000110 Y
+b101000 Z
+b1 D
+b1 U
+b1 X
+b1 _
+1)
+#100000
+b1 6
+0)
+#105000
+1)
+#110000
+1C
+1B
+13
+1.
+0)
+#115000
+0B
+0C
+0'
+0!
+1%
+1O
+0T
+0S
+1)
+#120000
+03
+0.
+0)
+#125000
+1'
+1!
+b11001000 [
+b10 E
+b10 V
+b10 \
+b10 ^
+b10001100 Y
+b1010000 Z
+b10 D
+b10 U
+b10 X
+b10 _
+0%
+0O
+1)
+#130000
+b10 6
+0)
+#135000
+1)
+#140000
+1C
+1B
+13
+1.
+0)
+#145000
+0B
+0C
+0'
+0!
+1%
+1O
+0T
+0S
+1)
+#150000
+03
+0.
+0)
+#155000
+1'
+1!
+0%
+0O
+b100101100 [
+b11 E
+b11 V
+b11 \
+b11 ^
+b11010010 Y
+b1111000 Z
+b11 D
+b11 U
+b11 X
+b11 _
+1)
+#160000
+b11 6
+0)
+#165000
+1)
+#170000
+1C
+1B
+13
+1.
+0)
+#175000
+0B
+0C
+0'
+0!
+1%
+1O
+0T
+0S
+1)
+#180000
+03
+0.
+0)
+#185000
+1'
+1!
+b110010000 [
+b100 E
+b100 V
+b100 \
+b100 ^
+b100011000 Y
+b10100000 Z
+b100 D
+b100 U
+b100 X
+b100 _
+0%
+0O
+1)
+#190000
+b100 6
+0)
+#195000
+1)
+#200000
+1C
+1B
+13
+1.
+0)
+#205000
+0B
+0C
+0'
+0!
+1%
+1O
+0T
+0S
+1)
+#210000
+03
+0.
+0)
+#215000
+1'
+1!
+0%
+0O
+b111110100 [
+b101 E
+b101 V
+b101 \
+b101 ^
+b101011110 Y
+b11001000 Z
+b101 D
+b101 U
+b101 X
+b101 _
+1)
+#220000
+b101 6
+0)
+#225000
+1)
+#230000
+1C
+1B
+13
+1.
+0)
+#235000
+0B
+0C
+0'
+0!
+1%
+1O
+0T
+0S
+1)
+#240000
+03
+0.
+0)
+#245000
+1'
+1!
+b1001011000 [
+b110 E
+b110 V
+b110 \
+b110 ^
+b110100100 Y
+b11110000 Z
+b110 D
+b110 U
+b110 X
+b110 _
+0%
+0O
+1)
+#250000
+b110 6
+0)
+#255000
+1)
+#260000
+1C
+1B
+13
+1.
+0)
+#265000
+0B
+0C
+0'
+0!
+1%
+1O
+0T
+0S
+1)
+#270000
+03
+0.
+0)
+#275000
+1'
+1!
+0%
+0O
+b1010111100 [
+b111 E
+b111 V
+b111 \
+b111 ^
+b111101010 Y
+b100011000 Z
+b111 D
+b111 U
+b111 X
+b111 _
+1)
+#280000
+b111 6
+0)
+#285000
+1)
+#290000
+1C
+1B
+13
+1.
+0)
+#295000
+0B
+0C
+0'
+0!
+1%
+1O
+0T
+0S
+1)
+#300000
+03
+0.
+0)
+#305000
+1'
+1!
+b1100100000 [
+b1000 E
+b1000 V
+b1000 \
+b1000 ^
+b1000110000 Y
+b101000000 Z
+b1000 D
+b1000 U
+b1000 X
+b1000 _
+0%
+0O
+1)
+#310000
+b0 c
+b1000 6
+0)
+#315000
+1)
+#320000
+1C
+1B
+b0 H
+13
+1.
+b0 1
+b0 9
+b0 @
+0)
+#325000
+0B
+0C
+0'
+0!
+1%
+0N
+1O
+0T
+b0 Q
+0S
+1)
+#330000
+03
+0.
+0)
+#335000
+1'
+1!
+0%
+0O
+b1001110110 Y
+b101101000 Z
+b1001 D
+b1001 U
+b1001 X
+b1001 _
+1)
+#340000
+b1001 6
+0)
+#345000
+1)
+#350000
+1C
+1B
+13
+1.
+0)
+#355000
+0B
+0C
+0'
+0!
+1%
+1O
+0T
+0S
+1)
+#360000
+03
+0.
+0)
+#365000
+1'
+1!
+b1010111100 Y
+b110010000 Z
+b1010 D
+b1010 U
+b1010 X
+b1010 _
+0%
+0O
+1)
+#370000
+b1000 `
+b1010 6
+0)
+#375000
+1)
+#380000
+1,
+b1000 *
+b1000 7
+b1000 >
+0)
+#385000
+0(
+1"
+b101000001000 $
+b101000001000 <
+b101000001000 K
+1)
+#390000
+b101000001000 a
+0,
+0)
+#395000
+1(
+0"
+1)
+#400000
+b1100 `
+b101000001000 5
+0)
+#405000
+1)
+#410000
+1,
+b1100 *
+b1100 7
+b1100 >
+0)
+#415000
+0(
+1"
+b10 $
+b10 <
+b10 K
+1)
+#420000
+b10 a
+0,
+0)
+#425000
+1(
+0"
+1)
+#430000
+b10 4
+0)

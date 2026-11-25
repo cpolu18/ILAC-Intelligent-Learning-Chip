@@ -5,8 +5,13 @@ import joblib
 
 from pathlib import Path
 from datetime import datetime
+from ilac_soc_bridge import run_ilac_soc
 
-# Page configuration
+
+# --------------------------------------------------
+# 1. PAGE CONFIGURATION
+# --------------------------------------------------
+
 st.set_page_config(
     page_title="ILAC - Intelligent Learning Assistant Chip",
     page_icon="🎓",
@@ -15,50 +20,75 @@ st.set_page_config(
 
 st.title("🎓 ILAC")
 st.subheader("Intelligent Learning Assistant Chip")
+
 st.write(
     "Test your knowledge and discover which concepts "
     "need more practice."
 )
 
-# File paths
+
+# --------------------------------------------------
+# 2. FILE PATHS
+# --------------------------------------------------
+
 QUESTION_FILE = Path("ilac_questions.csv")
 RESULT_FILE = Path("ilac_results.csv")
 MODEL_FILE = Path("ilac_model.pkl")
 
-# Load trained ML model
+
+# --------------------------------------------------
+# 3. LOAD MACHINE LEARNING MODEL
+# --------------------------------------------------
+
 model = None
 
 if MODEL_FILE.exists():
+
     try:
         model = joblib.load(MODEL_FILE)
+
     except Exception as error:
         st.warning(f"Could not load ML model: {error}")
+
 else:
     st.warning("ILAC ML model file is missing.")
 
-# Load questions
+
+# --------------------------------------------------
+# 4. LOAD QUESTION BANK
+# --------------------------------------------------
+
 if not QUESTION_FILE.exists():
     st.error("ilac_questions.csv is missing.")
     st.stop()
 
 try:
     df = pd.read_csv(QUESTION_FILE)
+
 except Exception as error:
     st.error(f"Could not read question file: {error}")
     st.stop()
 
-# Check required columns
 required_columns = [
-    "subject", "concept", "question",
-    "option_a", "option_b", "option_c",
-    "option_d", "correct_answer"
+    "subject",
+    "concept",
+    "question",
+    "option_a",
+    "option_b",
+    "option_c",
+    "option_d",
+    "correct_answer"
 ]
 
 if not all(column in df.columns for column in required_columns):
     st.error("Your CSV file is missing required columns.")
     st.stop()
 
-# Student details
+
+# --------------------------------------------------
+# 5. STUDENT DETAILS
+# --------------------------------------------------
+
 st.header("Student Details")
 
 student_name = st.text_input("Enter your name")
@@ -69,9 +99,16 @@ if len(subjects) == 0:
     st.error("No subjects found in the question bank.")
     st.stop()
 
-selected_subject = st.selectbox("Select your subject", subjects)
+selected_subject = st.selectbox(
+    "Select your subject",
+    subjects
+)
 
-# Filter questions
+
+# --------------------------------------------------
+# 6. FILTER QUESTIONS
+# --------------------------------------------------
+
 subject_questions = df[
     df["subject"] == selected_subject
 ].reset_index(drop=True)
@@ -81,13 +118,19 @@ st.divider()
 st.header(f"{selected_subject} Quiz")
 st.write(f"Total Questions: {len(subject_questions)}")
 
-# Quiz form
+
+# --------------------------------------------------
+# 7. QUIZ FORM
+# --------------------------------------------------
+
 with st.form("ilac_quiz_form"):
 
     for index, row in subject_questions.iterrows():
 
         st.markdown(f"### Question {index + 1}")
+
         st.write(f"**Concept:** {row['concept']}")
+
         st.write(row["question"])
 
         options = {
@@ -112,19 +155,25 @@ with st.form("ilac_quiz_form"):
         use_container_width=True
     )
 
-# Process submitted answers
+
+# --------------------------------------------------
+# 8. PROCESS SUBMITTED ANSWERS
+# --------------------------------------------------
+
 if submitted:
 
     if not student_name.strip():
-        st.warning("Please enter your name before submitting.")
+
+        st.warning(
+            "Please enter your name before submitting."
+        )
 
     else:
+
         records = []
         correct_count = 0
 
-        timestamp = datetime.now().strftime(
-            "%Y-%m-%d %H:%M:%S"
-        )
+        timestamp = datetime.now().astimezone().isoformat()
 
         for index, row in subject_questions.iterrows():
 
@@ -145,23 +194,53 @@ if submitted:
                 "timestamp": timestamp,
                 "student_name": student_name.strip(),
                 "subject": selected_subject,
-                "concept": row["concept"],
-                "question": row["question"],
+                "concept": str(row["concept"]),
+                "question": str(row["question"]),
                 "selected_answer": selected_answer,
                 "correct_answer": correct_answer,
-                "is_correct": is_correct
+                "is_correct": bool(is_correct)
             })
 
         # Calculate score
+
         total_questions = len(subject_questions)
 
         accuracy = (
             correct_count / total_questions
-        ) * 100
+        ) * 100 if total_questions > 0 else 0
 
         incorrect_count = total_questions - correct_count
 
-        # ML prediction
+
+        # --------------------------------------------------
+        # 9. VERILOG SOC PROCESSING
+        # --------------------------------------------------
+
+        soc_result = None
+
+        try:
+
+            answer_flags = [
+                record["is_correct"] for record in records
+            ]
+
+            soc_result = run_ilac_soc(answer_flags)
+
+            st.success(
+                "ILAC Verilog SoC simulation completed successfully!"
+            )
+
+        except Exception as error:
+
+            st.error(
+                f"ILAC SoC simulation failed: {error}"
+            )
+
+
+        # --------------------------------------------------
+        # 10. MACHINE LEARNING PREDICTION
+        # --------------------------------------------------
+
         ml_prediction = None
 
         if model is not None:
@@ -174,34 +253,59 @@ if submitted:
             }])
 
             try:
+
                 ml_prediction = model.predict(
                     student_features
                 )[0]
 
             except Exception as error:
-                st.warning(f"ML prediction failed: {error}")
 
-        # Save results
+                st.warning(
+                    f"ML prediction failed: {error}"
+                )
+
+
+        # --------------------------------------------------
+        # 11. SAVE RESULTS TO LOCAL CSV
+        # --------------------------------------------------
+
         new_results = pd.DataFrame(records)
 
-        if RESULT_FILE.exists():
+        try:
 
-            old_results = pd.read_csv(RESULT_FILE)
+            if RESULT_FILE.exists():
 
-            all_results = pd.concat(
-                [old_results, new_results],
-                ignore_index=True
+                old_results = pd.read_csv(RESULT_FILE)
+
+                all_results = pd.concat(
+                    [old_results, new_results],
+                    ignore_index=True
+                )
+
+            else:
+
+                all_results = new_results
+
+            all_results.to_csv(
+                RESULT_FILE,
+                index=False
             )
 
-        else:
-            all_results = new_results
+            st.success(
+                "Quiz results saved successfully to local CSV!"
+            )
 
-        all_results.to_csv(
-            RESULT_FILE,
-            index=False
-        )
+        except Exception as error:
 
-        # Store result for display
+            st.warning(
+                f"Local CSV backup failed: {error}"
+            )
+
+
+        # --------------------------------------------------
+        # 12. STORE RESULTS
+        # --------------------------------------------------
+
         st.session_state["last_result"] = {
             "student": student_name.strip(),
             "subject": selected_subject,
@@ -209,26 +313,60 @@ if submitted:
             "total": total_questions,
             "accuracy": accuracy,
             "records": records,
-            "ml_prediction": ml_prediction
+            "ml_prediction": ml_prediction,
+            "soc_result": soc_result
         }
 
-# Display results
+
+# --------------------------------------------------
+# 13. DISPLAY QUIZ RESULTS
+# --------------------------------------------------
+
 result = st.session_state.get("last_result")
 
 if result and result["subject"] == selected_subject:
 
     st.divider()
+
     st.header("📊 Your Quiz Results")
 
     col1, col2, col3 = st.columns(3)
 
-    col1.metric("Correct Answers", result["correct"])
-    col2.metric("Total Questions", result["total"])
-    col3.metric("Accuracy", f"{result['accuracy']:.1f}%")
+    col1.metric(
+        "Correct Answers",
+        result["correct"]
+    )
 
-    st.progress(result["accuracy"] / 100)
+    col2.metric(
+        "Total Questions",
+        result["total"]
+    )
 
-    # Machine learning prediction
+    col3.metric(
+        "Accuracy",
+        f"{result['accuracy']:.1f}%"
+    )
+
+    st.progress(
+        result["accuracy"] / 100
+    )
+
+
+    # --------------------------------------------------
+    # 14. LOCAL DATABASE STATUS
+    # --------------------------------------------------
+
+    st.subheader("💾 Local Storage Status")
+
+    st.success(
+        "Quiz results are stored in ilac_results.csv"
+    )
+
+
+    # --------------------------------------------------
+    # 15. MACHINE LEARNING RESULT
+    # --------------------------------------------------
+
     st.subheader("🤖 ILAC Machine Learning Prediction")
 
     if result["ml_prediction"] is not None:
@@ -245,33 +383,97 @@ if result and result["subject"] == selected_subject:
         )
 
     else:
-        st.warning("ML prediction is currently unavailable.")
 
-    # Concept-wise performance
+        st.warning(
+            "ML prediction is currently unavailable."
+        )
+
+
+    # --------------------------------------------------
+    # 16. ILAC VERILOG SOC RESULT
+    # --------------------------------------------------
+
+    st.subheader("💻 ILAC Verilog SoC Result")
+
+    soc_result = result.get("soc_result")
+
+    if soc_result is not None:
+
+        soc_col1, soc_col2 = st.columns(2)
+
+        with soc_col1:
+
+            st.metric(
+                "SoC Correct Answers",
+                soc_result["correct"]
+            )
+
+        with soc_col2:
+
+            st.metric(
+                "SoC Total Questions",
+                soc_result["total"]
+            )
+
+        st.success(
+            f"SoC Classification: {soc_result['classification']}"
+        )
+
+        st.caption(
+            "Classification generated by the simulated "
+            "Verilog SoC through AXI4-Lite transactions."
+        )
+
+    else:
+
+        st.warning(
+            "Verilog SoC result is currently unavailable."
+        )
+
+
+    # --------------------------------------------------
+    # 17. CONCEPT-WISE PERFORMANCE
+    # --------------------------------------------------
+
     result_df = pd.DataFrame(result["records"])
 
     concept_performance = (
-        result_df.groupby("concept")["is_correct"]
-        .mean() * 100
+        result_df.groupby("concept")["is_correct"].mean() * 100
     )
 
     st.subheader("Concept-wise Performance")
 
     for concept, score in concept_performance.items():
 
-        st.write(f"**{concept}: {score:.1f}%**")
+        st.write(
+            f"**{concept}: {score:.1f}%**"
+        )
+
         st.progress(score / 100)
 
         if score < 40:
-            st.warning(f"Practice {concept} more.")
+
+            st.warning(
+                f"Practice {concept} more."
+            )
 
         elif score < 70:
-            st.info(f"Keep improving in {concept}.")
+
+            st.info(
+                f"Keep improving in {concept}."
+            )
 
         else:
-            st.success(f"Good performance in {concept}!")
 
-    # Answer review
+            st.success(
+                f"Good performance in {concept}!"
+            )
+
+
+    # --------------------------------------------------
+    # 18. ANSWER REVIEW
+    # --------------------------------------------------
+
     st.subheader("Answer Review")
 
     for index, record in enumerate(result["records"]):
@@ -294,6 +496,11 @@ if result and result["subject"] == selected_subject:
                 f"Your answer: {record['selected_answer']} | "
                 f"Correct answer: {record['correct_answer']}"
             )
+
+
+# --------------------------------------------------
+# 19. FOOTER
+# --------------------------------------------------
 
 st.divider()
 

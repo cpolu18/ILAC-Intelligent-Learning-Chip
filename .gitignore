@@ -3,3 +3,12 @@ ilac_results.csv
 ilac_features.csv
 __pycache__/
 *.pyc
+.streamlit/secrets.toml
+# Generated simulation executables
+*.vvp
+ilac_waveform_sim
+ilac_classification_sim
+
+# Python cache
+__pycache__/
+*.pyc

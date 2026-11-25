@@ -1,0 +1,21 @@
+VCD info: dumpfile ilac_classification_waveform.vcd opened for output.
+ILAC FOUR-CLASSIFICATION TESTS
+--------------------------------
+TEST 1: Correct=0 Total=0
+Classification: INVALID
+PASS
+--------------------------------
+TEST 2: Correct=2 Total=10
+Classification: WEAK
+PASS
+--------------------------------
+TEST 3: Correct=5 Total=10
+Classification: AVERAGE
+PASS
+--------------------------------
+TEST 4: Correct=8 Total=10
+Classification: GOOD
+PASS
+--------------------------------
+ALL FOUR CLASSIFICATION TESTS COMPLETED
+ilac_classification_tb.sv:118: $finish called at 1380000 (1ps)
