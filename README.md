@@ -60,3 +60,29 @@ The ILAC_SoC_Evidence folder contains simulation waveforms, AXI transaction logs
 
 ## Implementation Note
 The SoC was verified through RTL simulation and generic logic synthesis. No physical FPGA implementation or hardware deployment has been performed.
+
+## System Architecture
+
+```mermaid
+flowchart TD
+    A["Student"] --> B["Streamlit Quiz Application"]
+    B --> C["Quiz Evaluation"]
+    C --> D["Local CSV Storage"]
+    C --> E["Machine Learning Model"]
+    E --> F["ML Performance Prediction"]
+    C --> G["Python–SoC Bridge"]
+    G --> H["Icarus Verilog Simulator"]
+    H --> I["AXI4-Lite Interface"]
+    I --> J["ILAC Verilog SoC"]
+    J --> K["Quiz Processor"]
+    K --> L["Performance Counters"]
+    L --> M["Performance Classifier"]
+    M --> N["INVALID / WEAK / AVERAGE / GOOD"]
+    N --> I
+    I --> G
+    G --> B
+    F --> O["Final Results Dashboard"]
+    B --> O
+git add README.md
+git commit -m "Add ILAC system architecture diagram"
+git push origin main
