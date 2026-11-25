@@ -1,0 +1,124 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.ilac.learningassistant"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+7-->INJECTED
+8        android:minSdkVersion="26"
+8-->INJECTED
+9        android:targetSdkVersion="36" />
+9-->INJECTED
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->/workspaces/ILAC-Intelligent-Learning-Chip/android-app/app/src/main/AndroidManifest.xml:2:1-63
+11-->/workspaces/ILAC-Intelligent-Learning-Chip/android-app/app/src/main/AndroidManifest.xml:2:18-60
+12
+13    <instrumentation
+13-->[org.pytorch:executorch-android:1.5.1] /home/codespace/.gradle/caches/9.8.2/transforms/3bee8a967600f5f228fdcca012d60f68/transformed/executorch-android-1.5.1/AndroidManifest.xml:7:5-10:58
+14        android:name="androidx.test.runner.AndroidJUnitRunner"
+14-->[org.pytorch:executorch-android:1.5.1] /home/codespace/.gradle/caches/9.8.2/transforms/3bee8a967600f5f228fdcca012d60f68/transformed/executorch-android-1.5.1/AndroidManifest.xml:8:9-63
+15        android:label="Tests for ExecuTorch Modules"
+15-->[org.pytorch:executorch-android:1.5.1] /home/codespace/.gradle/caches/9.8.2/transforms/3bee8a967600f5f228fdcca012d60f68/transformed/executorch-android-1.5.1/AndroidManifest.xml:9:9-53
+16        android:targetPackage="org.pytorch.executorch" />
+16-->[org.pytorch:executorch-android:1.5.1] /home/codespace/.gradle/caches/9.8.2/transforms/3bee8a967600f5f228fdcca012d60f68/transformed/executorch-android-1.5.1/AndroidManifest.xml:10:9-55
+17
+18    <permission
+18-->[androidx.core:core:1.13.1] /home/codespace/.gradle/caches/9.8.2/transforms/d0f431c5d22c862bc7ea24f64249d5bb/transformed/core-1.13.1/AndroidManifest.xml:22:5-24:47
+19        android:name="com.ilac.learningassistant.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+19-->[androidx.core:core:1.13.1] /home/codespace/.gradle/caches/9.8.2/transforms/d0f431c5d22c862bc7ea24f64249d5bb/transformed/core-1.13.1/AndroidManifest.xml:23:9-81
+20        android:protectionLevel="signature" />
+20-->[androidx.core:core:1.13.1] /home/codespace/.gradle/caches/9.8.2/transforms/d0f431c5d22c862bc7ea24f64249d5bb/transformed/core-1.13.1/AndroidManifest.xml:24:9-44
+21
+22    <uses-permission android:name="com.ilac.learningassistant.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+22-->[androidx.core:core:1.13.1] /home/codespace/.gradle/caches/9.8.2/transforms/d0f431c5d22c862bc7ea24f64249d5bb/transformed/core-1.13.1/AndroidManifest.xml:26:5-97
+22-->[androidx.core:core:1.13.1] /home/codespace/.gradle/caches/9.8.2/transforms/d0f431c5d22c862bc7ea24f64249d5bb/transformed/core-1.13.1/AndroidManifest.xml:26:22-94
+23
+24    <application
+24-->/workspaces/ILAC-Intelligent-Learning-Chip/android-app/app/src/main/AndroidManifest.xml:3:5-18:19
+25        android:allowBackup="false"
+25-->/workspaces/ILAC-Intelligent-Learning-Chip/android-app/app/src/main/AndroidManifest.xml:4:9-36
+26        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+26-->[androidx.core:core:1.13.1] /home/codespace/.gradle/caches/9.8.2/transforms/d0f431c5d22c862bc7ea24f64249d5bb/transformed/core-1.13.1/AndroidManifest.xml:28:18-86
+27        android:debuggable="true"
+28        android:extractNativeLibs="false"
+28-->INJECTED
+29        android:label="ILAC Learning Assistant"
+29-->/workspaces/ILAC-Intelligent-Learning-Chip/android-app/app/src/main/AndroidManifest.xml:5:9-48
+30        android:theme="@android:style/Theme.Material.Light.NoActionBar" >
+30-->/workspaces/ILAC-Intelligent-Learning-Chip/android-app/app/src/main/AndroidManifest.xml:6:9-72
+31        <activity
+31-->/workspaces/ILAC-Intelligent-Learning-Chip/android-app/app/src/main/AndroidManifest.xml:8:9-17:20
+32            android:name="com.ilac.learningassistant.MainActivity"
+32-->/workspaces/ILAC-Intelligent-Learning-Chip/android-app/app/src/main/AndroidManifest.xml:9:13-41
+33            android:exported="true" >
+33-->/workspaces/ILAC-Intelligent-Learning-Chip/android-app/app/src/main/AndroidManifest.xml:10:13-36
+34            <intent-filter>
+34-->/workspaces/ILAC-Intelligent-Learning-Chip/android-app/app/src/main/AndroidManifest.xml:12:13-15:29
+35                <action android:name="android.intent.action.MAIN" />
+35-->/workspaces/ILAC-Intelligent-Learning-Chip/android-app/app/src/main/AndroidManifest.xml:13:17-69
+35-->/workspaces/ILAC-Intelligent-Learning-Chip/android-app/app/src/main/AndroidManifest.xml:13:25-66
+36
+37                <category android:name="android.intent.category.LAUNCHER" />
+37-->/workspaces/ILAC-Intelligent-Learning-Chip/android-app/app/src/main/AndroidManifest.xml:14:17-77
+37-->/workspaces/ILAC-Intelligent-Learning-Chip/android-app/app/src/main/AndroidManifest.xml:14:27-74
+38            </intent-filter>
+39        </activity>
+40
+41        <provider
+41-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/codespace/.gradle/caches/9.8.2/transforms/6bed48d32d05022120bd2108b33644a6/transformed/profileinstaller-1.3.0/AndroidManifest.xml:24:9-32:20
+42            android:name="androidx.startup.InitializationProvider"
+42-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/codespace/.gradle/caches/9.8.2/transforms/6bed48d32d05022120bd2108b33644a6/transformed/profileinstaller-1.3.0/AndroidManifest.xml:25:13-67
+43            android:authorities="com.ilac.learningassistant.androidx-startup"
+43-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/codespace/.gradle/caches/9.8.2/transforms/6bed48d32d05022120bd2108b33644a6/transformed/profileinstaller-1.3.0/AndroidManifest.xml:26:13-68
+44            android:exported="false" >
+44-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/codespace/.gradle/caches/9.8.2/transforms/6bed48d32d05022120bd2108b33644a6/transformed/profileinstaller-1.3.0/AndroidManifest.xml:27:13-37
+45            <meta-data
+45-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/codespace/.gradle/caches/9.8.2/transforms/6bed48d32d05022120bd2108b33644a6/transformed/profileinstaller-1.3.0/AndroidManifest.xml:29:13-31:52
+46                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+46-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/codespace/.gradle/caches/9.8.2/transforms/6bed48d32d05022120bd2108b33644a6/transformed/profileinstaller-1.3.0/AndroidManifest.xml:30:17-85
+47                android:value="androidx.startup" />
+47-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/codespace/.gradle/caches/9.8.2/transforms/6bed48d32d05022120bd2108b33644a6/transformed/profileinstaller-1.3.0/AndroidManifest.xml:31:17-49
+48        </provider>
+49
+50        <receiver
+50-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/codespace/.gradle/caches/9.8.2/transforms/6bed48d32d05022120bd2108b33644a6/transformed/profileinstaller-1.3.0/AndroidManifest.xml:34:9-52:20
+51            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+51-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/codespace/.gradle/caches/9.8.2/transforms/6bed48d32d05022120bd2108b33644a6/transformed/profileinstaller-1.3.0/AndroidManifest.xml:35:13-76
+52            android:directBootAware="false"
+52-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/codespace/.gradle/caches/9.8.2/transforms/6bed48d32d05022120bd2108b33644a6/transformed/profileinstaller-1.3.0/AndroidManifest.xml:36:13-44
+53            android:enabled="true"
+53-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/codespace/.gradle/caches/9.8.2/transforms/6bed48d32d05022120bd2108b33644a6/transformed/profileinstaller-1.3.0/AndroidManifest.xml:37:13-35
+54            android:exported="true"
+54-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/codespace/.gradle/caches/9.8.2/transforms/6bed48d32d05022120bd2108b33644a6/transformed/profileinstaller-1.3.0/AndroidManifest.xml:38:13-36
+55            android:permission="android.permission.DUMP" >
+55-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/codespace/.gradle/caches/9.8.2/transforms/6bed48d32d05022120bd2108b33644a6/transformed/profileinstaller-1.3.0/AndroidManifest.xml:39:13-57
+56            <intent-filter>
+56-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/codespace/.gradle/caches/9.8.2/transforms/6bed48d32d05022120bd2108b33644a6/transformed/profileinstaller-1.3.0/AndroidManifest.xml:40:13-42:29
+57                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+57-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/codespace/.gradle/caches/9.8.2/transforms/6bed48d32d05022120bd2108b33644a6/transformed/profileinstaller-1.3.0/AndroidManifest.xml:41:17-91
+57-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/codespace/.gradle/caches/9.8.2/transforms/6bed48d32d05022120bd2108b33644a6/transformed/profileinstaller-1.3.0/AndroidManifest.xml:41:25-88
+58            </intent-filter>
+59            <intent-filter>
+59-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/codespace/.gradle/caches/9.8.2/transforms/6bed48d32d05022120bd2108b33644a6/transformed/profileinstaller-1.3.0/AndroidManifest.xml:43:13-45:29
+60                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+60-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/codespace/.gradle/caches/9.8.2/transforms/6bed48d32d05022120bd2108b33644a6/transformed/profileinstaller-1.3.0/AndroidManifest.xml:44:17-85
+60-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/codespace/.gradle/caches/9.8.2/transforms/6bed48d32d05022120bd2108b33644a6/transformed/profileinstaller-1.3.0/AndroidManifest.xml:44:25-82
+61            </intent-filter>
+62            <intent-filter>
+62-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/codespace/.gradle/caches/9.8.2/transforms/6bed48d32d05022120bd2108b33644a6/transformed/profileinstaller-1.3.0/AndroidManifest.xml:46:13-48:29
+63                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+63-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/codespace/.gradle/caches/9.8.2/transforms/6bed48d32d05022120bd2108b33644a6/transformed/profileinstaller-1.3.0/AndroidManifest.xml:47:17-88
+63-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/codespace/.gradle/caches/9.8.2/transforms/6bed48d32d05022120bd2108b33644a6/transformed/profileinstaller-1.3.0/AndroidManifest.xml:47:25-85
+64            </intent-filter>
+65            <intent-filter>
+65-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/codespace/.gradle/caches/9.8.2/transforms/6bed48d32d05022120bd2108b33644a6/transformed/profileinstaller-1.3.0/AndroidManifest.xml:49:13-51:29
+66                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+66-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/codespace/.gradle/caches/9.8.2/transforms/6bed48d32d05022120bd2108b33644a6/transformed/profileinstaller-1.3.0/AndroidManifest.xml:50:17-95
+66-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/codespace/.gradle/caches/9.8.2/transforms/6bed48d32d05022120bd2108b33644a6/transformed/profileinstaller-1.3.0/AndroidManifest.xml:50:25-92
+67            </intent-filter>
+68        </receiver>
+69    </application>
+70
+71</manifest>

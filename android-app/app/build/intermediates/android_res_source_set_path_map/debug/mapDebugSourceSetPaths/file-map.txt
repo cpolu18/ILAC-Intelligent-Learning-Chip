@@ -1,0 +1,8 @@
+com.ilac.learningassistant.app-pngs-0 /workspaces/ILAC-Intelligent-Learning-Chip/android-app/app/build/generated/res/pngs/debug
+com.ilac.learningassistant.app-updated_navigation_xml-1 /workspaces/ILAC-Intelligent-Learning-Chip/android-app/app/build/generated/updated_navigation_xml/debug
+com.ilac.learningassistant.app-packageDebugResources-2 /workspaces/ILAC-Intelligent-Learning-Chip/android-app/app/build/intermediates/incremental/debug/packageDebugResources/merged.dir
+com.ilac.learningassistant.app-packageDebugResources-3 /workspaces/ILAC-Intelligent-Learning-Chip/android-app/app/build/intermediates/incremental/debug/packageDebugResources/stripped.dir
+com.ilac.learningassistant.app-debug-4 /workspaces/ILAC-Intelligent-Learning-Chip/android-app/app/build/intermediates/merged_res/debug/mergeDebugResources
+com.ilac.learningassistant.app-debug-5 /workspaces/ILAC-Intelligent-Learning-Chip/android-app/app/src/debug/res
+com.ilac.learningassistant.app-main-6 /workspaces/ILAC-Intelligent-Learning-Chip/android-app/app/src/main/res
+gradleHome-0 /home/codespace/.gradle
