@@ -21,9 +21,15 @@ public class MainActivity extends Activity {
     EditText questionInput;
 
     Button downloadButton;
+    Button loadButton;
+    Button sendButton;
+
     ProgressBar progressBar;
     TextView downloadStatus;
 
+    LocalAI ai = new LocalAI();
+
+    boolean modelLoaded = false;
     int padding = 16;
 
     @Override
@@ -52,34 +58,77 @@ public class MainActivity extends Activity {
         root.addView(subtitle);
 
         TextView subjects = new TextView(this);
-        subjects.setText("Electronics  |  VLSI  |  Mathematics  |  Programming");
+        subjects.setText(
+                "Electronics  |  VLSI  |  Mathematics  |  Programming");
         subjects.setTextSize(12);
         subjects.setTextColor(Color.rgb(35, 90, 150));
         subjects.setGravity(Gravity.CENTER);
         subjects.setPadding(4, 12, 4, 12);
         root.addView(subjects);
 
-        // MODEL DOWNLOAD SECTION
+        // MODEL DOWNLOAD
 
         downloadButton = new Button(this);
         downloadButton.setText("Download AI Model");
 
         downloadStatus = new TextView(this);
-        downloadStatus.setText("AI model not downloaded yet.");
+        downloadStatus.setText("AI model download verified previously.");
         downloadStatus.setTextSize(12);
         downloadStatus.setPadding(4, 4, 4, 4);
 
         progressBar = new ProgressBar(
-                this, null, android.R.attr.progressBarStyleHorizontal);
+                this, null,
+                android.R.attr.progressBarStyleHorizontal);
+
         progressBar.setMax(100);
-        progressBar.setProgress(0);
         progressBar.setVisibility(View.GONE);
 
         root.addView(downloadButton);
         root.addView(downloadStatus);
         root.addView(progressBar);
 
-        // CHAT SECTION
+        // LOAD MODEL
+
+        loadButton = new Button(this);
+        loadButton.setText("Load AI Model");
+        root.addView(loadButton);
+
+        loadButton.setOnClickListener(v -> {
+
+            loadButton.setEnabled(false);
+            downloadStatus.setText(
+                    "Loading AI model into memory. Please wait...");
+
+            ai.load(this, new LocalAI.Listener() {
+
+                @Override
+                public void onLoaded() {
+                    modelLoaded = true;
+
+                    downloadStatus.setText(
+                            "ILAC AI model loaded successfully. Ready to chat.");
+
+                    loadButton.setText("AI Model Loaded");
+                }
+
+                @Override
+                public void onResponse(String response) {
+                }
+
+                @Override
+                public void onError(String error) {
+                    modelLoaded = false;
+
+                    downloadStatus.setText(
+                            "Model loading failed: " + error);
+
+                    loadButton.setText("Retry Load");
+                    loadButton.setEnabled(true);
+                }
+            });
+        });
+
+        // CHAT
 
         scrollView = new ScrollView(this);
 
@@ -99,10 +148,10 @@ public class MainActivity extends Activity {
 
         addMessage(
                 "ILAC",
-                "Hello! Welcome to ILAC. Ask me a learning question."
+                "Hello! Welcome to ILAC. Load the AI model and ask me a question."
         );
 
-        // MESSAGE INPUT
+        // INPUT
 
         LinearLayout inputRow = new LinearLayout(this);
         inputRow.setOrientation(LinearLayout.HORIZONTAL);
@@ -111,7 +160,6 @@ public class MainActivity extends Activity {
         questionInput = new EditText(this);
         questionInput.setHint("Ask your question...");
         questionInput.setTextSize(15);
-        questionInput.setSingleLine(false);
         questionInput.setMinHeight(52);
         questionInput.setPadding(12, 8, 12, 8);
 
@@ -123,7 +171,7 @@ public class MainActivity extends Activity {
 
         inputRow.addView(questionInput, inputParams);
 
-        Button sendButton = new Button(this);
+        sendButton = new Button(this);
         sendButton.setText("Send");
 
         inputRow.addView(sendButton);
@@ -131,7 +179,7 @@ public class MainActivity extends Activity {
 
         sendButton.setOnClickListener(v -> sendMessage());
 
-        // MODEL DOWNLOAD BUTTON
+        // DOWNLOAD BUTTON
 
         downloadButton.setOnClickListener(v -> {
 
@@ -156,8 +204,7 @@ public class MainActivity extends Activity {
 
                         downloadStatus.setText(
                                 "Downloading " + fileName +
-                                ": " + percent + "%"
-                        );
+                                ": " + percent + "%");
                     }
                 }
 
@@ -169,19 +216,19 @@ public class MainActivity extends Activity {
                     progressBar.setProgress(100);
 
                     downloadStatus.setText(
-                            "Model and tokenizer downloaded and verified."
-                    );
+                            "Model and tokenizer downloaded and verified.");
 
                     downloadButton.setText("Model Downloaded");
                     downloadButton.setEnabled(false);
+
+                    loadButton.setEnabled(true);
                 }
 
                 @Override
                 public void onError(String message) {
 
                     downloadStatus.setText(
-                            "Download failed: " + message
-                    );
+                            "Download failed: " + message);
 
                     downloadButton.setText("Retry Download");
                     downloadButton.setEnabled(true);
@@ -201,14 +248,51 @@ public class MainActivity extends Activity {
             return;
         }
 
+        if (!modelLoaded) {
+            addMessage(
+                    "ILAC",
+                    "Please load the AI model before asking questions."
+            );
+            return;
+        }
+
         addMessage("You", question);
         questionInput.setText("");
 
-        addMessage(
-                "ILAC",
-                "Your question has been received. The ExecuTorch AI model " +
-                "is not connected yet. Model integration is our next step."
-        );
+        sendButton.setEnabled(false);
+
+        addMessage("ILAC", "Generating response...");
+
+        ai.ask(question, new LocalAI.Listener() {
+
+            @Override
+            public void onLoaded() {
+            }
+
+            @Override
+            public void onResponse(String response) {
+
+                sendButton.setEnabled(true);
+
+                if (response.isEmpty()) {
+                    addMessage(
+                            "ILAC",
+                            "The model returned an empty response.");
+                } else {
+                    addMessage("ILAC", response);
+                }
+            }
+
+            @Override
+            public void onError(String error) {
+
+                sendButton.setEnabled(true);
+
+                addMessage(
+                        "ILAC",
+                        "AI inference error: " + error);
+            }
+        });
     }
 
     private void addMessage(String sender, String message) {
@@ -229,15 +313,19 @@ public class MainActivity extends Activity {
         LinearLayout.LayoutParams params =
                 new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT
-                );
+                        LinearLayout.LayoutParams.WRAP_CONTENT);
 
         params.setMargins(0, 6, 0, 6);
 
         chatLayout.addView(text, params);
 
         scrollView.post(
-                () -> scrollView.fullScroll(View.FOCUS_DOWN)
-        );
+                () -> scrollView.fullScroll(View.FOCUS_DOWN));
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ai.close();
     }
 }
