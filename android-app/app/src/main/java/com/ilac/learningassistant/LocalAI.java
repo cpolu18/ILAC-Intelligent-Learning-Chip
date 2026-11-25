@@ -17,12 +17,13 @@ public class LocalAI {
 
     public interface Listener {
         void onLoaded();
+        void onProgress(String response);
         void onResponse(String response);
         void onError(String error);
     }
 
     private LlmModule module;
-    private boolean loaded = false;
+    private volatile boolean loaded = false;
 
     private final Handler mainHandler =
             new Handler(Looper.getMainLooper());
@@ -61,7 +62,7 @@ public class LocalAI {
 
             } catch (Exception e) {
                 mainHandler.post(() ->
-                        listener.onError(e.getMessage()));
+                        listener.onError(String.valueOf(e.getMessage())));
             }
         });
     }
@@ -75,10 +76,22 @@ public class LocalAI {
                 }
 
                 String prompt =
-                        "You are ILAC, a helpful learning assistant. "
-                        + "Explain concepts clearly and simply.\n"
-                        + "User: " + question
-                        + "\nAssistant:";
+                         "You are ILAC (Intelligent Learning Assistant Chip), "
+        + "an academic learning assistant for engineering students. "
+        + "Your purpose is to teach concepts, not to have casual conversations. "
+        + "Give accurate, structured, educational answers. "
+        + "Use this format for academic questions:\n"
+        + "1. Definition\n"
+        + "2. Working Principle\n"
+        + "3. Important Points\n"
+        + "4. Simple Example\n"
+        + "5. Short Summary\n"
+        + "Use simple language and explain technical terms. "
+        + "Avoid unnecessary greetings and conversational filler. "
+        + "If the question is not academic, politely guide the student "
+        + "back to learning.\n"
+        + "Student Question: " + question
+        + "\nILAC Educational Answer:";
 
                 StringBuilder response = new StringBuilder();
 
@@ -93,6 +106,11 @@ public class LocalAI {
                     @Override
                     public void onResult(String token) {
                         response.append(token);
+
+                        String current = response.toString();
+
+                        mainHandler.post(() ->
+                                listener.onProgress(current));
                     }
 
                     @Override
@@ -113,7 +131,7 @@ public class LocalAI {
 
             } catch (Exception e) {
                 mainHandler.post(() ->
-                        listener.onError(e.getMessage()));
+                        listener.onError(String.valueOf(e.getMessage())));
             }
         });
     }
